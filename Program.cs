@@ -60,6 +60,12 @@ namespace TransferBatch
 
         public static Dictionary<string, decimal> CalculateCommissions(List<Transfer> transfers)
         {
+            if(transfers.Any(t => t.TransferAmount <= 0)) 
+            {
+                throw new ArgumentException("Transfer cannot equal or less than 0.");
+            }
+                
+
             var accountCommissions = new Dictionary<string, decimal>();
 
             var groupedTransfers = transfers.GroupBy(t => t.AccountId);

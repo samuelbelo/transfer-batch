@@ -50,5 +50,23 @@ namespace TransferBatch.Tests
 
             Assert.Equal(20.00m, result["A13"]);
         }
+
+        [Fact]
+        public void ShouldntCalculateComissionEqualOrLessThanZero()
+        {
+            var transfers = new List<Transfer>
+            {
+                new Transfer { AccountId = "A13", TransferId = "T1005", TransferAmount = 100.00m },
+                new Transfer { AccountId = "A13", TransferId = "T1006", TransferAmount = -10.00m },
+                new Transfer { AccountId = "A13", TransferId = "T1007", TransferAmount = 100.00m }
+            };
+
+            var result = Program.CalculateCommissions(transfers);
+
+            //
+
+        }
+
+        
     }
 }
