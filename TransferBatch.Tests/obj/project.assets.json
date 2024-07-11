@@ -986,11 +986,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Samuel\\Downloads\\transfer-batch-processing_Enunciado 3\\transfer-batch-processing\\TransferBatch\\TransferBatch.Tests\\TransferBatch.Tests.csproj",
+      "projectUniqueName": "C:\\repos\\transfer-batch\\TransferBatch.Tests\\TransferBatch.Tests.csproj",
       "projectName": "TransferBatch.Tests",
-      "projectPath": "C:\\Users\\Samuel\\Downloads\\transfer-batch-processing_Enunciado 3\\transfer-batch-processing\\TransferBatch\\TransferBatch.Tests\\TransferBatch.Tests.csproj",
+      "projectPath": "C:\\repos\\transfer-batch\\TransferBatch.Tests\\TransferBatch.Tests.csproj",
       "packagesPath": "C:\\Users\\Samuel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Samuel\\Downloads\\transfer-batch-processing_Enunciado 3\\transfer-batch-processing\\TransferBatch\\TransferBatch.Tests\\obj\\",
+      "outputPath": "C:\\repos\\transfer-batch\\TransferBatch.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Samuel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1011,8 +1011,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Samuel\\Downloads\\transfer-batch-processing_Enunciado 3\\transfer-batch-processing\\TransferBatch\\TransferBatch.csproj": {
-              "projectPath": "C:\\Users\\Samuel\\Downloads\\transfer-batch-processing_Enunciado 3\\transfer-batch-processing\\TransferBatch\\TransferBatch.csproj"
+            "C:\\repos\\transfer-batch\\TransferBatch.csproj": {
+              "projectPath": "C:\\repos\\transfer-batch\\TransferBatch.csproj"
             }
           }
         }

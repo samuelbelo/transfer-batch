@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Vp/kFDKvwdA=",
+  "dgSpecHash": "aZszKK8OLf4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Samuel\\Downloads\\transfer-batch-processing_Enunciado 3\\transfer-batch-processing\\TransferBatch\\TransferBatch.Tests\\TransferBatch.Tests.csproj",
+  "projectFilePath": "C:\\repos\\transfer-batch\\TransferBatch.Tests\\TransferBatch.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Samuel\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\Samuel\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
