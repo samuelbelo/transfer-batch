@@ -23,15 +23,20 @@ namespace TransferBatch
                 return;
             }
 
-            var transfers = new List<Transfer>();
-            try
+            ProcessCommissionsInBatches(filePath);
+        }
+
+        public static void ProcessCommissionsInBatches(string filePath, int batchSize = 1000)
+        {
+            using (var reader = new StreamReader(filePath))
             {
-                using (var reader = new StreamReader(filePath))
+                var buffer = new List<Transfer>();
+                while (!reader.EndOfStream)
                 {
-                    while (!reader.EndOfStream)
+                    for (int i = 0; i < batchSize && !reader.EndOfStream; i++)
                     {
                         var line = reader.ReadLine();
-                        var values = line!.Split(',');
+                        var values = line.Split(',');
 
                         var transfer = new Transfer
                         {
@@ -39,22 +44,17 @@ namespace TransferBatch
                             TransferId = values[1],
                             TransferAmount = decimal.Parse(values[2], CultureInfo.InvariantCulture)
                         };
-
-                        transfers.Add(transfer);
+                        buffer.Add(transfer);
                     }
+
+                    var accountCommissions = CalculateCommissions(buffer);
+                    foreach (var account in accountCommissions)
+                    {
+                        Console.WriteLine($"{account.Key},{account.Value.ToString("0.##", CultureInfo.InvariantCulture)}");
+                    }
+
+                    buffer.Clear(); // Clear the buffer for next batch
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error reading file: {ex.Message}");
-                return;
-            }
-
-            var accountCommissions = CalculateCommissions(transfers);
-
-            foreach (var account in accountCommissions)
-            {
-                Console.WriteLine($"{account.Key},{account.Value.ToString("0.##", CultureInfo.InvariantCulture)}");
             }
         }
 
@@ -75,7 +75,6 @@ namespace TransferBatch
                 }
 
                 var maxTransferAmount = transfersForAccount.Max(t => t.TransferAmount);
-
                 var maxTransfers = transfersForAccount
                     .Where(t => t.TransferAmount == maxTransferAmount)
                     .ToList();
@@ -93,7 +92,7 @@ namespace TransferBatch
                     })
                     .Sum(t => t.TransferAmount * 0.1m);
 
-                accountCommissions[accountId!] = totalCommission;
+                accountCommissions[accountId] = totalCommission;
             }
 
             return accountCommissions;
@@ -102,8 +101,8 @@ namespace TransferBatch
 
     public class Transfer
     {
-        public string? AccountId { get; set; }
-        public string? TransferId { get; set; }
+        public string AccountId { get; set; }
+        public string TransferId { get; set; }
         public decimal TransferAmount { get; set; }
     }
 }

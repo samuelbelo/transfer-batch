@@ -4,7 +4,7 @@ using TransferBatch;
 
 namespace TransferBatch.Tests
 {
-    public class TransferBatchTests
+    public class CalculateCommissionsTests
     {
         [Fact]
         public void ShouldReturnCorrectCommissions()
