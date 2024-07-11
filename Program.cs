@@ -60,11 +60,10 @@ namespace TransferBatch
 
         public static Dictionary<string, decimal> CalculateCommissions(List<Transfer> transfers)
         {
-            if(transfers.Any(t => t.TransferAmount <= 0)) 
+            if (transfers.Any(t => t.TransferAmount <= 0))
             {
                 throw new ArgumentException("Transfer cannot equal or less than 0.");
             }
-                
 
             var accountCommissions = new Dictionary<string, decimal>();
 
@@ -85,17 +84,11 @@ namespace TransferBatch
                     .Where(t => t.TransferAmount == maxTransferAmount)
                     .ToList();
 
-                var excludeTransfer = true;
+                // Considera apenas uma das transferências de maior valor para excluir
+                var maxTransferToExclude = maxTransfers.First();
+
                 var totalCommission = transfersForAccount
-                    .Where(t =>
-                    {
-                        if (excludeTransfer && maxTransfers.Contains(t))
-                        {
-                            excludeTransfer = false;
-                            return false;
-                        }
-                        return true;
-                    })
+                    .Where(t => t != maxTransferToExclude)
                     .Sum(t => t.TransferAmount * 0.1m);
 
                 accountCommissions[accountId] = totalCommission;
