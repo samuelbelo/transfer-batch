@@ -31,6 +31,8 @@ namespace TransferBatch
             using (var reader = new StreamReader(filePath))
             {
                 var buffer = new List<Transfer>();
+                var totalCommissions = new Dictionary<string, decimal>();  // Dicionário para acumular as comissões
+
                 while (!reader.EndOfStream)
                 {
                     for (int i = 0; i < batchSize && !reader.EndOfStream; i++)
@@ -48,12 +50,25 @@ namespace TransferBatch
                     }
 
                     var accountCommissions = CalculateCommissions(buffer);
+
                     foreach (var account in accountCommissions)
                     {
-                        Console.WriteLine($"{account.Key},{account.Value.ToString("0.##", CultureInfo.InvariantCulture)}");
+                        if (totalCommissions.ContainsKey(account.Key))
+                        {
+                            totalCommissions[account.Key] += account.Value;
+                        }
+                        else
+                        {
+                            totalCommissions.Add(account.Key, account.Value);
+                        }
                     }
 
                     buffer.Clear(); // Clear the buffer for next batch
+                }
+
+                foreach (var account in totalCommissions)
+                {
+                    Console.WriteLine($"{account.Key},{account.Value.ToString("0.##", CultureInfo.InvariantCulture)}");
                 }
             }
         }
