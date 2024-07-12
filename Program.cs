@@ -99,14 +99,21 @@ namespace TransferBatch
                     .Where(t => t.TransferAmount == maxTransferAmount)
                     .ToList();
 
-                // Considera apenas uma das transferências de maior valor para excluir
                 var maxTransferToExclude = maxTransfers.First();
 
-                var totalCommission = transfersForAccount
-                    .Where(t => t != maxTransferToExclude)
-                    .Sum(t => t.TransferAmount * 0.1m);
+                if (transfersForAccount.Count == 1 || maxTransfers.Count == transfersForAccount.Count)
+                {
+                    var totalCommission = transfersForAccount.Sum(t => t.TransferAmount * 0.1m);
+                    accountCommissions[accountId] = totalCommission;
+                }
+                else
+                {
+                    var totalCommission = transfersForAccount
+                        .Where(t => t != maxTransferToExclude)
+                        .Sum(t => t.TransferAmount * 0.1m);
 
-                accountCommissions[accountId] = totalCommission;
+                    accountCommissions[accountId] = totalCommission;
+                }
             }
 
             return accountCommissions;

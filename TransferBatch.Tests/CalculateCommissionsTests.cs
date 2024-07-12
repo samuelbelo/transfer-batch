@@ -23,7 +23,7 @@ namespace TransferBatch.Tests
 
             // Assert
             Assert.Equal(30.00m, result["A10"]);
-            Assert.Equal(0.00m, result["A11"]);
+            Assert.Equal(10.00m, result["A11"]);
         }
 
         [Fact]
