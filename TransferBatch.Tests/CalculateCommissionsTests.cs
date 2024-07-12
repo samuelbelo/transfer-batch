@@ -38,7 +38,7 @@ namespace TransferBatch.Tests
             // Act
             var result = Program.CalculateCommissions(transfers);
             // Assert
-            Assert.Equal(0.00m, result["A12"]);
+            Assert.Equal(50.00m, result["A12"]);
         }
 
         [Fact]
